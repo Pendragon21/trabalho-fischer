@@ -31,7 +31,7 @@ def find_pairs(n, a0, b0):
 # Initial values a0 and b0
 a0 = 1
 b0 = 2
-n = 10  # Value of n
+n = 20  # Value of n
 
 result = find_pairs(n, a0, b0)
 print(result)
