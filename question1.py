@@ -1,32 +1,32 @@
-import random
+def encontre_R_e_S(pares):
+    # Inicialize R* como -infinito e S* como um conjunto vazio
+    R_star = float('-inf')
+    S_star = set()
 
-def encontrar_R_e_S(pares, a0, b0):
-    n = len(pares)
-    R = a0 / b0
-    S = {0}  # Começa com o par obrigatório (a0, b0)
+    # Itere sobre cada par (a, b) no conjunto de pares
+    for a, b in pares:
+        # Calcule a razão R para o par (a, b)
+        R = a / b
 
-    for i in range(1, n):
-        ai, bi = pares[i]
-        if ai / bi > R:
-            S.add(i)
-            R = sum(pares[j][0] for j in S) / sum(pares[j][1] for j in S)
+        # Se a razão R for maior que R*, atualize R* e redefina S* como {a, b}
+        if R > R_star:
+            R_star = R
+            S_star = {(a, b)}
 
-        # Remove elementos de S que não satisfazem o lema
-        S.difference_update(j for j in S if pares[j][0] / pares[j][1] <= R)
+        # Se a razão R for igual a R*, adicione o par (a, b) a S*
+        elif R == R_star:
+            S_star.add((a, b))
 
-    return R, S
+    return R_star, S_star
 
 # Exemplo de uso
+pares = []
+for i in range(1, 6):
+    for j in range(1,6):
+        pares.append((i, j))
+    
+print(pares)
+R_maximo, S_maximo = encontre_R_e_S(pares)
 
-
-# Gerar pares ordenados aleatórios
-n = 10  # Número de pares
-pares = [(random.randint(1, 100), random.randint(1, 100)) for _ in range(n)]
-
-# Par obrigatório (a0, b0)
-a0, b0 = random.choice(pares)
-
-R, S = encontrar_R_e_S(pares, a0, b0)
-
-print("R+:", R)  # Imprime o valor de R+
-print("S*:", S)  # Imprime o conjunto S* que maximiza R+
+print("R* (Razao Maxima):", R_maximo)
+print("S* (Conjunto de Pares Correspondentes):", S_maximo)
