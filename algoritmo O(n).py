@@ -13,9 +13,9 @@ def encontrar_S_estrela(pares):
 
     return S_estrela, R_max
 
-# Exemplo de uso:
-pares = [(3, 2), (4, 3), (2, 1), (5, 4)]
-S_estrela, R_max = encontrar_S_estrela(pares)
+# Exemplo de uso com pares ordenados (ai, bi)
+pares_ordenados = [(3, 2), (4, 3), (2, 1), (5, 4)]
+S_estrela, R_max = encontrar_S_estrela(pares_ordenados)
 
 print("Conjunto S*: ", S_estrela)
 print("Valor maximo da razao R(S*): ", R_max)
