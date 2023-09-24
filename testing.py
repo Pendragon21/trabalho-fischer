@@ -17,7 +17,7 @@ def maximize_R(pairs, a0, b0):
     return S
 
 # Exemplo de uso:
-pairs = [(1, 2), (3, 4), (5, 6), ...]  # Lista de pares ordenados
-a0, b0 = 1, 2  # Par obrigatório
+pairs = [(1, 2), (3, 4), (5, 6), ...]  
+a0, b0 = 1, 2  
 S = maximize_R(pairs, a0, b0)
 print("Conjunto S que maximiza R(S):", S)
