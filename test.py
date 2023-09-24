@@ -1,37 +1,35 @@
-def gcd(a, b):
-    # Calculate the greatest common divisor using Euclid's algorithm
-    while b:
-        a, b = b, a % b
-    return a
+import os
+import random
+import time
 
-def simplify_fraction(a, b):
-    # Simplify a fraction by dividing both the numerator and denominator by their GCD
-    common_divisor = gcd(a, b)
-    return a // common_divisor, b // common_divisor
+MaxDim = 100
+Rand_Max = 100000
 
-def find_pairs(n, a0, b0):
-    # Initialize the set S with the initial pair R = a0/b0
-    S = {(a0, b0)}
+def generate_random_numbers(n):
+    return [random.randint(0, 999) for _ in range(n)]
 
-    for a in range(1, n + 1):
-        for b in range(1, n + 1):
-            if (a, b) not in S:
-                # Calculate the new pair (p, q) and simplify it
-                p, q = simplify_fraction(a + a0, b + b0)
+def generate_instance(n):
+    random_numbers = generate_random_numbers(n)
+    x = random.choice([117] + random_numbers)
+    return [n] + random_numbers + [x]
 
-                if p == a0 and q == b0:
-                    # If (p, q) matches the initial pair, add it to S
-                    S.add((a, b))
-                elif (p, q) in S:
-                    # If (p, q) is already in S, remove it (it doesn't satisfy the conditions)
-                    S.remove((p, q))
+def generate_and_save_instances(n, n_inst):
+    for j in range(1, n_inst + 1):
+        num = str(n)
+        print(f"Num: {num}")
 
-    return S
+        j_str = str(j).zfill(2)
+        file = f"pph_{num}_{j_str}.dat"
 
-# Initial values a0 and b0
-a0 = 1
-b0 = 2
-n = 20  # Value of n
+        instance = generate_instance(n)
 
-result = find_pairs(n, a0, b0)
-print(result)
+        with open(file, "w") as p_in:
+            p_in.write("\n".join(map(str, instance)))
+
+if __name__ == "__main__":
+    Dim = int(input("n: "))
+    v = int(input("n_inst: "))
+    
+    cputime = time.process_time()
+    generate_and_save_instances(Dim, v)
+    print(f"CPU Time: {time.process_time() - cputime}")
